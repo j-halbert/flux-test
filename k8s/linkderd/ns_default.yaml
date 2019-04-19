@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  creationTimestamp: "2019-04-17T22:14:49Z"
+  name: default
+  resourceVersion: "7039"
+  selfLink: /api/v1/namespaces/default
+  uid: 37365b53-615e-11e9-9d18-f8633f59af8d
+  annotations:
+    linkerd.io/inject: enabled
+spec:
+  finalizers:
+  - kubernetes
+status:
+  phase: Active

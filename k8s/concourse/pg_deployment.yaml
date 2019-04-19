@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: postgres 
+  labels:
+    app: postgres 
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: postgres 
+    spec:
+      containers:
+      - name: postgres
+        image: "postgres:alpine"
+        env:
+          - name: POSTGRES_DB
+            value: concourse 
+          - name: POSTGRES_USER
+            value: postgres
+          - name: POSTGRES_PASSWORD
+            value: postgres
+          - name: PGDATA
+            value: /database

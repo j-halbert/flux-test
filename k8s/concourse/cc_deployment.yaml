@@ -1,0 +1,41 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: concourse 
+  labels:
+    app: concourse 
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: concourse 
+    spec:
+      containers:
+      - name: concourse 
+        args: ["quickstart"]
+        image: "concourse/concourse:5"
+        imagePullPolicy: Always
+        securityContext:
+          privileged: true
+        env:
+          - name: CONCOURSE_POSTGRES_HOST
+            value: postgres.default.svc.cluster.local
+          - name: CONCOURSE_POSTGRES_USER
+            value: postgres
+          - name: CONCOURSE_POSTGRES_PASSWORD
+            value: postgres
+          - name: CONCOURSE_POSTGRES_DATABASE
+            value: concourse
+          - name: CONCOURSE_ADD_LOCAL_USER
+            value: test:test
+          - name: CONCOURSE_MAIN_TEAM_LOCAL_USER
+            value: test
+          - name: CONCOURSE_EXTERNAL_URL
+            value: http://10.152.183.49:8080
+            # Vault setup - also needs to configure / set up process for generating a secure token
+            # for Concourse - https://concourse-ci.org/vault-credential-manager.html#authenticating-with-vault
+          - name: CONCOURSE_VAULT_URL
+            value: http://vault.default.svc.cluster.local:8200
+          - name: CONCOURSE_VAULT_CLIENT_TOKEN
+            value: s.8DxSqLRKLIZCeLSuA7TQp5M6
